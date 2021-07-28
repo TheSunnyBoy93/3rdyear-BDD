@@ -1,74 +1,62 @@
 #COMMANDE INSERTION :
 
 ##Inserer dans abonement :
-
 INSERT INTO `abonnement` (`Id_abonnement`, `N_`, `Vol_emprunt_max`, `Date_debut`, `Date_Fin`, `Renouvellement_abo`) VALUES (NULL, '1', '20', '2021-07-20', '2021-08-20', 'Oui');
 
 ##Inserer dans Artiste :
-
 INSERT INTO `artiste` (`Id_artiste`, `Nom`, `Date_naissance`, `Origine`) VALUES (NULL, 'Johnny Hallyday', '1943-06-15', 'Francais');
 
 ##Inserer dans Cotisation
-
 INSERT INTO `cotisation` (`Id_cotisation`, `N_`, `Montant`, `Date_paiement`, `Choix_abonment`, `Id_abonnement`) VALUES (NULL, '1', '10€', '29/07/2021', 'Basique', '1');
 
 ##Inserer dans Objet
-
 INSERT INTO `objet` (`Id_objet`, `N__reference`, `Quantite`, `Format`, `Nb_cassette`, `Nb_disque`) VALUES (NULL, '01', '10', 'CD Johnny', '0', '10');
 
 ##Inserer dans Membre 
-
 INSERT INTO `membre` (`Id_membre`, `N_`, `Ville`, `Pays`, `Status_archive`, `Habitant_local`, `Catg_socio`, `Vol_emprunt_annuel_`, `Vol_emprunt_simu`, `Nom`, `Prenom`, `Sexe`, `Num_rue`, `Nom_rue`, `Code_postal`, `Id_cotisation`) VALUES (NULL, '1', 'Liege', 'Belgique', 'NON', 'OUI', 'Professeur', '5', '2', 'Roels', 'Carolina', 'F', '185', 'rue des koala', '78246', '1');
 
 ##Inseser dans Musique
-
 INSERT INTO `musique` (`Id_musique`, `Nom_musique`, `Date_sortie`, `duree`) VALUES (NULL, 'Allumer le feu', '1998-05-03', '3 min 55 sec');
 
 ##Inserer dans Role
-
 INSERT INTO `role` (`Id_Role`, `Acteur`, `Auteur`, `Compositeur`, `Interprete`, `Metteur_scene`) VALUES (NULL, 'Louis Moulin', 'Loudovic RH', 'Jean-Sebastien Bach', 'Christopher Mohindo', 'Lartiste');
 
 ##Inserer dans Remise
-
 INSERT INTO `remise` (`Id_remise`, `N_`, `Nom_media`, `Type_media`, `Etat_materiel`, `Date_remise`, `Quantite`, `Status`) VALUES (NULL, '1', 'Allumer le feu', 'Disque', 'Neuf', '2021-07-26', '1', 'Disponible');
 
 ##Inserer dans Emprunt
-
 INSERT INTO `emprunt` (`Id_emprunt`, `N_`, `Date_début`, `Duree`, `Quantite`, `Status`, `Payement_supp`, `Id_remise`, `Id_objet`, `Id_membre`) VALUES (NULL, '1', '2021-07-28', '20 jours', '2', 'Indisponible', 'NON', '1', '1', '1');
 
 ##Inserer dans Film
-
 INSERT INTO `film` (`Id_Film`, `Nom_film`, `Date_sortie`, `Date_realisation`, `duree`, `Id_artiste`) VALUES (NULL, 'Le tueur de la cave a vin', '2021-07-01', '2021-05-01', '5h35min40sec', '1');
 
 ##Inserer dans Attribuer
-
 INSERT INTO `attribuer` (`Id_artiste`, `Id_Role`) VALUES (NULL, '1');
 
 ##Inserer dans Defenir/Definir
-
 INSERT INTO `defenir` (`Id_objet`, `Id_musique`) VALUES (NULL, '1');
 INSERT INTO `definir` (`Id_objet`, `Id_Film`) VALUES (NULL, '1');
 
 ##Inserer dans Interpreter
-
 INSERT INTO `interpreter` (`Id_musique`, `Id_artiste`) VALUES (NULL, '1');
 
 ##Inserer dans Jouer
-
 INSERT INTO `jouer` (`Id_Film`, `Id_artiste`) VALUES (NULL, '1');
 
 ##Inserer dans Penalite
-
 INSERT INTO `penalite` (`Id_penalite`, `N_`, `Montant`, `Date_echeance`, `Id_remise`) VALUES (NULL, '1', '30€', '2021-07-30', '1');
 
 ##Inserer dans Realiser
-
 INSERT INTO `réaliser` (`Id_objet`, `Id_remise`) VALUES (NULL, '1');
 
 #COMMANDE DE TEST :
 
-##Recherche (Exemple Johnny)
-
-SELECT * FROM `mediathèque`.`artiste` WHERE (CONVERT(`Id_artiste` USING utf8) LIKE '%Johnny%' OR CONVERT(`Nom` USING utf8) LIKE '%Johnny%' OR CONVERT(`Date_naissance` USING utf8) LIKE '%Johnny%' OR CONVERT(`Origine` USING utf8) LIKE '%Johnny%');
-SELECT * FROM `artiste` WHERE 'id_user' LIKE '1';
-
+##Test sur invite de commande :
+> - Lancer invite de commande et se placer dans le repertoire \bin de mysql
+> - Faire mysql -u root
+> - Se placer dans la base voulue : USE `nom_base`;
+> - Afficher les tables disponibles : SHOW TABLES;
+> - Afficher les valeur contenues dans une table : SELECT * FROM `nom_table`;
+> - Rechercher une valeur spécifique dans une table (Exemple Johnny): SELECT * FROM `mediathèque`.`artiste` WHERE (CONVERT(`Id_artiste` USING utf8) LIKE '%Johnny%' OR CONVERT(`Nom` USING utf8) LIKE '%Johnny%' OR CONVERT(`Date_naissance` USING utf8) LIKE '%Johnny%' OR CONVERT(`Origine` USING utf8) LIKE '%Johnny%');
+> - Supprimer une valeur : DELETE FROM `nom_table` WHERE `table`.`Id_valeur` = X;
+> - Modifier une valeur dans une table : UPDATE `nom_table` SET `valeur_a_modifier` = 'X' WHERE `nom_table`.`valeur_a_modifier` = X;
