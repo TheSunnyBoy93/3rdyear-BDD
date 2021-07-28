@@ -1,6 +1,8 @@
 # Projet Mediathèque
 
-Mini-projet réalisé dans le cadre de notre 3ème année en SRC.
+Mini-projet réalisé dans le cadre de notre 3ème année en SRC par le groupe ELSAJI.
+
+![alt text](https://github.com/TheSunnyBoy93/3rdyear-ELSAJI-PA/blob/main/Logo/logo%20presta.png)
 
 Creation d'une base de donnée MYSQL avec WAMP.
 
