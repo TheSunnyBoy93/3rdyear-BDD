@@ -4,6 +4,8 @@ Mini-projet réalisé dans le cadre de notre 3ème année en SRC.
 
 Creation d'une base de donnée MYSQL avec WAMP.
 
+Le fichier de commande disponible [ici](https://github.com/TheSunnyBoy93/3rdyear-BDD/blob/main/Commandes/commandes.txt).
+
 ## Contexte et objectif
 
 [Contexte du projet](https://github.com/TheSunnyBoy93/3rdyear-BDD/blob/main/Information/Sujet%20_%20M%C3%A9diath%C3%A8que.pdf)
