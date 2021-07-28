@@ -1,0 +1,181 @@
+CREATE TABLE abonnement(
+   Id_abonnement INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Vol_emprunt_max VARCHAR(50),
+   Date_debut DATE,
+   Date_Fin DATE,
+   Renouvellement_abo VARCHAR(50),
+   PRIMARY KEY(Id_abonnement)
+);
+
+CREATE TABLE objet(
+   Id_objet INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N__reference INT,
+   Quantite VARCHAR(50),
+   Format VARCHAR(50),
+   Nb_cassette INT,
+   Nb_disque INT,
+   PRIMARY KEY(Id_objet),
+   UNIQUE(N__reference)
+);
+
+CREATE TABLE remise(
+   Id_remise INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Nom_media VARCHAR(50),
+   Type_media VARCHAR(50),
+   Etat_materiel VARCHAR(50),
+   Date_remise DATE,
+   Quantite VARCHAR(50),
+   Status VARCHAR(50),
+   PRIMARY KEY(Id_remise),
+   UNIQUE(N_)
+);
+
+CREATE TABLE penalite(
+   Id_penalite INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Montant VARCHAR(50),
+   Date_echeance DATE,
+   Id_remise INT NOT NULL,
+   PRIMARY KEY(Id_penalite),
+   UNIQUE(N_),
+   FOREIGN KEY(Id_remise) REFERENCES remise(Id_remise)
+);
+
+CREATE TABLE musique(
+   Id_musique INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Nom_musique VARCHAR(50),
+   Date_sortie DATE,
+   duree VARCHAR(50),
+   PRIMARY KEY(Id_musique)
+);
+
+CREATE TABLE artiste(
+   Id_artiste INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Nom VARCHAR(50),
+   Date_naissance DATE,
+   Origine VARCHAR(50),
+   PRIMARY KEY(Id_artiste)
+);
+
+CREATE TABLE Role(
+   Id_Role INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Acteur VARCHAR(50),
+   Auteur VARCHAR(50),
+   Compositeur VARCHAR(50),
+   Interprete VARCHAR(50),
+   Metteur_scene VARCHAR(50),
+   PRIMARY KEY(Id_Role)
+);
+
+CREATE TABLE cotisation(
+   Id_cotisation INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Montant VARCHAR(50),
+   Date_paiement DATE,
+   Choix_abonment VARCHAR(50),
+   Id_abonnement INT NOT NULL,
+   PRIMARY KEY(Id_cotisation),
+   UNIQUE(Id_abonnement),
+   FOREIGN KEY(Id_abonnement) REFERENCES abonnement(Id_abonnement)
+);
+
+CREATE TABLE Film(
+   Id_Film INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Nom_film VARCHAR(50),
+   Date_sortie DATE,
+   Date_realisation DATE,
+   duree VARCHAR(50),
+   Id_artiste INT NOT NULL,
+   PRIMARY KEY(Id_Film),
+   FOREIGN KEY(Id_artiste) REFERENCES artiste(Id_artiste)
+);
+
+CREATE TABLE membre(
+   Id_membre INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Ville VARCHAR(50),
+   Pays VARCHAR(50),
+   Status_archive VARCHAR(50),
+   Habitant_local VARCHAR(50),
+   Catg_socio VARCHAR(50),
+   Vol_emprunt_annuel_ INT,
+   Vol_emprunt_simu INT,
+   Nom VARCHAR(50),
+   Prenom VARCHAR(50),
+   Sexe VARCHAR(2),
+   Num_rue INT(5),
+   Nom_rue VARCHAR(50),
+   Code_postal VARCHAR(5),
+   Id_cotisation INT NOT NULL,
+   PRIMARY KEY(Id_membre),
+   UNIQUE(Id_cotisation),
+   FOREIGN KEY(Id_cotisation) REFERENCES cotisation(Id_cotisation)
+);
+
+CREATE TABLE emprunt(
+   Id_emprunt INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   N_ INT,
+   Date_début DATE,
+   Duree VARCHAR(50),
+   Quantite VARCHAR(50),
+   Status VARCHAR(50),
+   Payement_supp VARCHAR(50),
+   Id_remise INT NOT NULL,
+   Id_objet INT NOT NULL,
+   Id_membre INT NOT NULL,
+   PRIMARY KEY(Id_emprunt),
+   UNIQUE(N_),
+   FOREIGN KEY(Id_remise) REFERENCES remise(Id_remise),
+   FOREIGN KEY(Id_objet) REFERENCES objet(Id_objet),
+   FOREIGN KEY(Id_membre) REFERENCES membre(Id_membre)
+);
+
+CREATE TABLE réaliser(
+   Id_objet INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_remise INT,
+   PRIMARY KEY(Id_objet, Id_remise),
+   FOREIGN KEY(Id_objet) REFERENCES objet(Id_objet),
+   FOREIGN KEY(Id_remise) REFERENCES remise(Id_remise)
+);
+
+CREATE TABLE definir(
+   Id_objet INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_Film INT,
+   PRIMARY KEY(Id_objet, Id_Film),
+   FOREIGN KEY(Id_objet) REFERENCES objet(Id_objet),
+   FOREIGN KEY(Id_Film) REFERENCES Film(Id_Film)
+);
+
+CREATE TABLE defenir(
+   Id_objet INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_musique INT,
+   PRIMARY KEY(Id_objet, Id_musique),
+   FOREIGN KEY(Id_objet) REFERENCES objet(Id_objet),
+   FOREIGN KEY(Id_musique) REFERENCES musique(Id_musique)
+);
+
+CREATE TABLE jouer(
+   Id_Film INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_artiste INT,
+   PRIMARY KEY(Id_Film, Id_artiste),
+   FOREIGN KEY(Id_Film) REFERENCES Film(Id_Film),
+   FOREIGN KEY(Id_artiste) REFERENCES artiste(Id_artiste)
+);
+
+CREATE TABLE interpreter(
+   Id_musique INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_artiste INT,
+   PRIMARY KEY(Id_musique, Id_artiste),
+   FOREIGN KEY(Id_musique) REFERENCES musique(Id_musique),
+   FOREIGN KEY(Id_artiste) REFERENCES artiste(Id_artiste)
+);
+
+CREATE TABLE attribuer(
+   Id_artiste INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   Id_Role INT,
+   PRIMARY KEY(Id_artiste, Id_Role),
+   FOREIGN KEY(Id_artiste) REFERENCES artiste(Id_artiste),
+   FOREIGN KEY(Id_Role) REFERENCES Role(Id_Role)
+);
